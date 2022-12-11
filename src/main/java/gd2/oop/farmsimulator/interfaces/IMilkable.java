@@ -1,13 +1,34 @@
 package gd2.oop.farmsimulator.interfaces;
 
+import gd2.oop.farmsimulator.util.MilkType;
 import gd2.oop.farmsimulator.storage.Udder;
 
-import java.util.List;
-
 public interface IMilkable {
-    default double getCapacity() {
-        return this.getUdders().stream().mapToDouble(Udder::getCapacity).sum();
+    /**
+     * Get the udder of the animal.
+     *
+     * @return the udder of the animal.
+     */
+    Udder getUdder();
+
+    /**
+     * Get the milk type of the animal.
+     *
+     * @return the milk type of the animal.
+     */
+    MilkType getMilkType();
+
+    /**
+     * Refills the animal's udder.
+     */
+    default void refreshUdder() {
+        this.getUdder().refresh();
     }
 
-    List<Udder> getUdders();
+    /**
+     * @return Gets the milk capacity from the animal's udder.
+     */
+    default double getCapacity() {
+        return this.getUdder().getCapacity();
+    }
 }
